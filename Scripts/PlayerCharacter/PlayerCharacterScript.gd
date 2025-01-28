@@ -123,6 +123,8 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var mesh = $MeshInstance3D
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
+@onready var spawn = $spawn.get_meta("Value", "Vector3")
+@onready var fstep = $CameraHolder/FmodEventEmitter3D
 
 func _ready():
 	#set the start move speed
@@ -188,6 +190,8 @@ func inputManagement():
 	#add or remove some, and it prevent certain actions from being played when they shouldn't be
 	
 	if canInput:
+		if Input.is_action_just_pressed("quickReset"):
+			kill()
 		match currentState:
 			states.IDLE:
 				if Input.is_action_just_pressed("jump"):
@@ -444,6 +448,7 @@ func move(delta):
 		#get the move direction depending on the input
 		moveDirection = (cameraHolder.basis * Vector3(inputDirection.x, 0.0, inputDirection.y)).normalized()
 		
+		
 	#move applies when the character is on the floor
 	if is_on_floor():
 		#if the character is moving
@@ -469,13 +474,14 @@ func move(delta):
 			else:
 				velocity.x = lerp(velocity.x, moveDirection.x * moveSpeed, moveAcceleration * delta)
 				velocity.z = lerp(velocity.z, moveDirection.z * moveSpeed, moveAcceleration * delta)
-				
+				fstep.play()
 				#cancel desired move speed accumulation if the timer is out
 				if hitGroundCooldown <= 0: desiredMoveSpeed = velocity.length()
 					
 		#if the character is not moving
 		else:
 			#apply smooth stop 
+			fstep.stop()
 			velocity.x = lerp(velocity.x, 0.0, moveDecceleration * delta)
 			velocity.z = lerp(velocity.z, 0.0, moveDecceleration * delta)
 			
@@ -748,8 +754,10 @@ func collisionHandling():
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
 			if layer & (1 << 3-1) != 0: canWallRun = true 
 			else: canWallRun = false
-			
+
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):
 	print("something")
+func setsp(loc):
+	spawn = loc
 func kill():
 	get_tree().reload_current_scene()

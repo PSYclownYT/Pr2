@@ -1,4 +1,4 @@
-extends CSGCylinder3D
+extends CSGBox3D
 
 #class name
 class_name Jumppad

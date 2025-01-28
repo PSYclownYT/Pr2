@@ -93,5 +93,6 @@ func displaySpeedLines(dashTime):
 	speedLinesContainer.visible = false 
 	
 func _process(_delta):
+	pass
 	#this function manage the frames per second displayment
-	framesPerSecondLabelText.set_text(str(Engine.get_frames_per_second()))
+	
