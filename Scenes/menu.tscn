@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvwhdejq52cnr"]
+
+[ext_resource type="PackedScene" uid="uid://dq3tdyt3n2xm0" path="res://Scenes/metro.glb" id="1_6k5cj"]
+[ext_resource type="Script" path="res://Scenes/main_menu.gd" id="1_hjaic"]
+[ext_resource type="FontFile" uid="uid://bhtxfokxlbme7" path="res://VCR_OSD_MONO_1.001.ttf" id="3_5ql8c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qttk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tudd2"]
+
+[sub_resource type="Sky" id="Sky_lduhu"]
+sky_material = SubResource("ProceduralSkyMaterial_tudd2")
+
+[sub_resource type="Environment" id="Environment_125rd"]
+background_color = Color(0.551854, 0.294851, 0.193254, 1)
+background_energy_multiplier = 3.45
+sky = SubResource("Sky_lduhu")
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.2
+glow_strength = 0.85
+glow_bloom = 0.2
+glow_blend_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8u1ni"]
+albedo_color = Color(0.310617, 0.310617, 0.310617, 1)
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kexk8"]
+albedo_color = Color(0.12549, 0.568627, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vifqr"]
+height = 0.15
+radius = 2.0
+
+[node name="Menu" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = -5
+z_as_relative = false
+material = SubResource("ShaderMaterial_3qttk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Sketchfab_Scene" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_6k5cj")]
+transform = Transform3D(-1.11069e-07, 0, 2.54095, 0, 2.54095, 0, -2.54095, 0, -1.11069e-07, -146.455, 19.917, -9.62017)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.0449324, -0.274347, 0.96058, -0.00775444, 0.961618, 0.274281, -0.99896, 0.00487533, -0.0453352, -48.2905, 20.4243, -7.86192)
+cull_mask = 1
+environment = SubResource("Environment_125rd")
+current = true
+fov = 70.0
+near = 0.01
+far = 1000.0
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.0861385, 0, 0, 0, 1, 0, 0, 0, 0.113116, -108.013, -4.9152, 1.68695)
+cast_shadow = 0
+use_collision = true
+collision_mask = 2
+size = Vector3(260, 10.708, 210)
+material = SubResource("StandardMaterial3D_8u1ni")
+
+[node name="Jumppad" type="CSGCylinder3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -116.192, 0.473391, 1.97571)
+material_override = SubResource("StandardMaterial3D_kexk8")
+use_collision = true
+collision_mask = 2
+radius = 2.0
+height = 0.15
+
+[node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/Jumppad"]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Jumppad/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0425777, 0)
+shape = SubResource("CylinderShape3D_vifqr")
+
+[node name="MainMenu" type="Panel" parent="."]
+z_index = 5
+z_as_relative = false
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hjaic")
+
+[node name="play" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 458.0
+offset_right = 311.0
+offset_bottom = 622.0
+theme_override_fonts/font = ExtResource("3_5ql8c")
+theme_override_font_sizes/font_size = 28
+text = "Commence
+the running
+of parkour
+(the second)"
+
+[node name="exit" type="Button" parent="MainMenu"]
+layout_mode = 0
+offset_left = 847.0
+offset_top = 456.0
+offset_right = 1085.0
+offset_bottom = 537.0
+theme_override_fonts/font = ExtResource("3_5ql8c")
+theme_override_font_sizes/font_size = 28
+text = "Die"
+
+[node name="logo" type="Sprite2D" parent="MainMenu"]
+position = Vector2(976.25, 181.75)
+scale = Vector2(0.68457, 0.68457)
+
+[connection signal="area_entered" from="SubViewportContainer/SubViewport/Jumppad/Area3D" to="SubViewportContainer/SubViewport/Jumppad" method="_on_area_3d_area_entered"]
+[connection signal="pressed" from="MainMenu/play" to="MainMenu" method="_on_play_pressed"]
+[connection signal="pressed" from="MainMenu/exit" to="MainMenu" method="_on_exit_pressed"]

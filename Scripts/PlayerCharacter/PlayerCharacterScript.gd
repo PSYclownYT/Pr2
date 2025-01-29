@@ -11,6 +11,11 @@ enum states
 var currentState 
 
 #move variables
+@export_group("level time things")
+@export var tb:int
+@export var tg:int
+@export var tp:int
+
 @export_group("move variables")
 var moveSpeed : float
 var desiredMoveSpeed : float 
@@ -124,9 +129,15 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
 @onready var spawn = $spawn.get_meta("Value", "Vector3")
-@onready var fstep = $CameraHolder/FmodEventEmitter3D
+@onready var gold = $HUD/Panel/gold
+@onready var silver = $HUD/Panel/silver
+@onready var bronbe = $HUD/Panel/bronge
+#@onready var fstep = $CameraHolder/FmodEventEmitter3D
 
 func _ready():
+	bronbe.text = str(tp)
+	silver.text = str(tg)
+	gold.text = str(tb)
 	#set the start move speed
 	moveSpeed = walkSpeed
 	moveAcceleration = walkAcceleration
@@ -474,14 +485,14 @@ func move(delta):
 			else:
 				velocity.x = lerp(velocity.x, moveDirection.x * moveSpeed, moveAcceleration * delta)
 				velocity.z = lerp(velocity.z, moveDirection.z * moveSpeed, moveAcceleration * delta)
-				fstep.play()
+				#fstep.play()
 				#cancel desired move speed accumulation if the timer is out
 				if hitGroundCooldown <= 0: desiredMoveSpeed = velocity.length()
 					
 		#if the character is not moving
 		else:
 			#apply smooth stop 
-			fstep.stop()
+			#fstep.stop()
 			velocity.x = lerp(velocity.x, 0.0, moveDecceleration * delta)
 			velocity.z = lerp(velocity.z, 0.0, moveDecceleration * delta)
 			

@@ -1,0 +1,26 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://ef6rk0oirj7a"]
+
+[sub_resource type="Sky" id="Sky_vu35i"]
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_vu35i")
+ambient_light_source = 2
+ambient_light_color = Color(0.828075, 0.463172, 0.137828, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 1.3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_strength = 0.96
+glow_mix = 0.366
+glow_bloom = 0.71
+glow_blend_mode = 4
+glow_hdr_threshold = 2.9
+glow_hdr_scale = 1.65
+glow_hdr_luminance_cap = 156.8
+glow_map_strength = 0.77
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0184
+volumetric_fog_length = 256.0
+volumetric_fog_sky_affect = 0.0

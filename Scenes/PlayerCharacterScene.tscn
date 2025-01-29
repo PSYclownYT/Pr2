@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
+[ext_resource type="Environment" uid="uid://ef6rk0oirj7a" path="res://Scenes/PlayerCharacterScene.tres" id="3_wk60f"]
 [ext_resource type="Script" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Arts/Fonts/Ticketing.ttf" id="5_kleop"]
@@ -20,11 +21,6 @@ point_count = 4
 max_value = 10.0
 _data = [Vector2(0.245902, 8.66031), 0.0, 0.0, 0, 0, Vector2(0.577869, 7.86641), 0.0, 0.0, 0, 0, Vector2(0.901639, 6.97328), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="Environment" id="Environment_dv0i1"]
-glow_enabled = true
-glow_normalized = true
-glow_blend_mode = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0b8a"]
 albedo_texture = ExtResource("7_jclwn")
@@ -230,7 +226,7 @@ mouseInputSpeed = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 cull_mask = 1
-environment = SubResource("Environment_dv0i1")
+environment = ExtResource("3_wk60f")
 current = true
 fov = 100.0
 near = 0.01
@@ -593,13 +589,45 @@ theme_override_font_sizes/font_size = 40
 text = "00
 "
 
+[node name="gold" type="Label" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 41.0
+offset_right = 42.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 0.792157, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_rkixg")
+text = "0:04.00"
+
+[node name="silver" type="Label" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 68.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_rkixg")
+text = "0:8.00
+"
+
+[node name="bronge" type="Label" parent="HUD/Panel"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 76.0
+offset_right = 68.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(0.857879, 0.396918, 0.0834543, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_rkixg")
+text = "0:8.00
+"
+
 [node name="PauseMenu" parent="." instance=ExtResource("6_3wmtt")]
 visible = false
 
 [node name="spawn" type="Node" parent="."]
 metadata/value = Vector3(0, 0, 0)
-
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
-bank_paths = ["res://fmbanks/Desktop/feetsteps.bank"]
 
 [connection signal="sendKnockback" from="CameraHolder/Camera3D/ObjectTool" to="." method="_on_object_tool_send_knockback"]
