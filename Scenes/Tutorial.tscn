@@ -1,19 +1,20 @@
-[gd_scene load_steps=40 format=3 uid="uid://oj3blpxqf1bl"]
+[gd_scene load_steps=41 format=3 uid="uid://oj3blpxqf1bl"]
 
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="1_tvhlt"]
 [ext_resource type="Environment" uid="uid://ef6rk0oirj7a" path="res://Scenes/PlayerCharacterScene.tres" id="1_ydmmt"]
 [ext_resource type="Texture2D" uid="uid://bty2hh6xlhdeh" path="res://Arts/Textures/PSYtex/pt2/128x128/Brick/Brick_05-128x128.png" id="2_08diu"]
 [ext_resource type="Texture2D" uid="uid://cosanfwg57e4y" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_03.png" id="2_v37ox"]
+[ext_resource type="AudioStream" uid="uid://c7sflq4uw05cj" path="res://Musics/DavidKBD - InterstellarPack - 04 - Horsehead Nebula.ogg" id="3_ywg3t"]
 [ext_resource type="PackedScene" uid="uid://hbnu5u2t8jia" path="res://Scenes/secret(tut).tscn" id="6_5bnw4"]
 [ext_resource type="Texture2D" uid="uid://b4rgp7ghx8e50" path="res://Arts/Textures/PSYtex/pt2/128x128/Metal/Metal_08-128x128.png" id="6_loa13"]
-[ext_resource type="PackedScene" uid="uid://cul3rlim50y7v" path="res://Scenes/template.tscn" id="6_rkmsf"]
 [ext_resource type="Script" path="res://Scenes/winpad.gd" id="7_fdvxa"]
 [ext_resource type="Script" path="res://Scripts/Others/JumppadScript.gd" id="7_fgkll"]
-[ext_resource type="Script" path="res://Scenes/wgagsg.gd" id="7_qiduv"]
 [ext_resource type="FontFile" uid="uid://bhtxfokxlbme7" path="res://VCR_OSD_MONO_1.001.ttf" id="8_2bc0l"]
 [ext_resource type="Script" path="res://Scenes/killbrick.gd" id="8_canj1"]
 [ext_resource type="Script" path="res://Scenes/button.gd" id="9_h3wuo"]
 [ext_resource type="Script" path="res://Scenes/restart.gd" id="10_cgtjk"]
+[ext_resource type="PackedScene" uid="uid://cx4rmimjq0hkt" path="res://Scenes/level2.tscn" id="13_mtj8g"]
+[ext_resource type="Texture2D" uid="uid://2w32amd1soki" path="res://Arts/Textures/PSYtex/pt3/128x128/Door_02_Green.png" id="15_od211"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fllns"]
 albedo_texture = ExtResource("2_08diu")
@@ -100,6 +101,7 @@ _bundled = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80y8v"]
+size = Vector3(1, 1.83734, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4v3fj"]
 albedo_color = Color(0.603922, 0, 1, 1)
@@ -135,11 +137,8 @@ emission_energy_multiplier = 1.96
 [sub_resource type="BoxShape3D" id="BoxShape3D_qi1e1"]
 size = Vector3(1.28467, 0.99408, 0.994995)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulo6b"]
-albedo_color = Color(6.16074e-06, 0.951964, 0.881328, 1)
-emission_enabled = true
-emission = Color(0.8171, 0.254276, 0.526156, 1)
-emission_energy_multiplier = 3.05
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jo27"]
+albedo_texture = ExtResource("15_od211")
 
 [node name="TemplateMap" type="Node3D"]
 
@@ -152,9 +151,10 @@ environment = ExtResource("1_ydmmt")
 
 [node name="PlayerCharacterV2" parent="PlayerCharacter" instance=ExtResource("1_tvhlt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.5544, 3.65369, 0)
-tb = 3
-tg = 5
-tp = 7
+tb = 4.0
+tg = 6.0
+tp = 7.0
+music = ExtResource("3_ywg3t")
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -323,11 +323,11 @@ collision_mask = 2
 size = Vector3(5.90614, 6.42896, 16.558)
 
 [node name="CSGBox3D44" type="CSGBox3D" parent="Map/Blocks"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -161.623, 5.99104, -4.24914)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -161.623, 5.99104, -5.55561)
 material_override = SubResource("StandardMaterial3D_linps")
 use_collision = true
 collision_mask = 2
-size = Vector3(5.90614, 3.6886, 24.3923)
+size = Vector3(5.90614, 3.6886, 27.0052)
 
 [node name="CSGBox3D47" type="CSGBox3D" parent="Map/Blocks"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.031, 4.48325, -0.332)
@@ -706,13 +706,14 @@ shape = SubResource("BoxShape3D_qi1e1")
 [node name="victorycoll" type="Node3D" parent="Map"]
 
 [node name="winned!" type="CSGBox3D" parent="Map/victorycoll"]
-transform = Transform3D(-4.37114e-08, 0, -16.7137, 0, 47.3225, 0, 1, 0, -7.30579e-07, -164.152, 7.58181, -11.8501)
+transform = Transform3D(-4.37113e-08, -0.0941563, -16.7137, -8.69714e-11, 47.3224, -0.0332548, 1, 0, -7.30579e-07, -3.50146, 5.00555, -37.5685)
 material_override = SubResource("StandardMaterial3D_gpsk3")
 use_collision = true
 collision_layer = 0
 collision_mask = 0
 size = Vector3(1, 0.15, 1)
 script = ExtResource("7_fdvxa")
+scene = ExtResource("6_5bnw4")
 metadata/Scene = ExtResource("6_5bnw4")
 metadata/Whay = "0"
 
@@ -720,7 +721,7 @@ metadata/Whay = "0"
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/victorycoll/winned!/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0942951, 0, 0, 0, 1, 0, 0.0425775, 0)
+transform = Transform3D(1, 7.98139e-16, 1.36424e-12, 0, 0.0942951, 1.16415e-10, 0, -4.65661e-10, 1, 0, 0.013729, 2.98023e-08)
 shape = SubResource("BoxShape3D_80y8v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Map/victorycoll/winned!"]
@@ -731,7 +732,6 @@ offset_left = 1.0
 offset_top = 32.0
 offset_right = 41.0
 offset_bottom = 72.0
-script = ExtResource("7_qiduv")
 
 [node name="Seconds" type="Label" parent="Map/victorycoll/winned!/CanvasLayer/Panel"]
 layout_mode = 0
@@ -742,6 +742,16 @@ offset_bottom = 210.0
 theme_override_fonts/font = ExtResource("8_2bc0l")
 theme_override_font_sizes/font_size = 40
 text = "00."
+
+[node name="Minutes" type="Label" parent="Map/victorycoll/winned!/CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 174.0
+offset_right = 560.0
+offset_bottom = 210.0
+theme_override_fonts/font = ExtResource("8_2bc0l")
+theme_override_font_sizes/font_size = 40
+text = "1"
 
 [node name="Msecs" type="Label" parent="Map/victorycoll/winned!/CanvasLayer/Panel"]
 layout_mode = 0
@@ -761,6 +771,7 @@ offset_right = 631.0
 offset_bottom = 310.0
 text = "Next lebelbs"
 script = ExtResource("9_h3wuo")
+scene = ExtResource("13_mtj8g")
 
 [node name="restart" type="Button" parent="Map/victorycoll/winned!/CanvasLayer"]
 anchors_preset = 8
@@ -779,45 +790,35 @@ size_flags_vertical = 4
 text = "Restart"
 script = ExtResource("10_cgtjk")
 
-[node name="Secretwin" type="CSGBox3D" parent="Map/victorycoll"]
-transform = Transform3D(-4.37114e-08, 0, -8.34767, 0, 47.3225, 0, 1, 0, -3.64888e-07, -7.30574, 5.57769, -37.8525)
-material_override = SubResource("StandardMaterial3D_ulo6b")
+[node name="winned!2" type="CSGBox3D" parent="Map/victorycoll"]
+transform = Transform3D(-4.37113e-08, -0.0941563, -16.7137, -8.69714e-11, 47.3224, -0.0332548, 1, 0, -7.30579e-07, -167.665, 9.64013, -19.6747)
+material_override = SubResource("StandardMaterial3D_gpsk3")
 use_collision = true
 collision_layer = 0
 collision_mask = 0
 size = Vector3(1, 0.15, 1)
 script = ExtResource("7_fdvxa")
-metadata/Scene = ExtResource("6_rkmsf")
+scene = ExtResource("13_mtj8g")
+metadata/Scene = ExtResource("6_5bnw4")
 metadata/Whay = "0"
 
-[node name="Area3D" type="Area3D" parent="Map/victorycoll/Secretwin"]
+[node name="Area3D" type="Area3D" parent="Map/victorycoll/winned!2"]
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/victorycoll/Secretwin/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.0942951, 0, 0, 0, 1, 0, 0.0425775, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/victorycoll/winned!2/Area3D"]
+transform = Transform3D(1, 1.49596e-15, 2.50111e-12, 0, 0.0942951, 1.16415e-10, 0, -4.65661e-10, 1, 2.34617, 0.0182771, 0.000143051)
 shape = SubResource("BoxShape3D_80y8v")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Map/victorycoll/Secretwin"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Map/victorycoll/winned!2"]
 visible = false
 
-[node name="Panel" type="Panel" parent="Map/victorycoll/Secretwin/CanvasLayer"]
+[node name="Panel" type="Panel" parent="Map/victorycoll/winned!2/CanvasLayer"]
 offset_left = 1.0
 offset_top = 32.0
 offset_right = 41.0
 offset_bottom = 72.0
-script = ExtResource("7_qiduv")
 
-[node name="Minutes" type="Label" parent="Map/victorycoll/Secretwin/CanvasLayer/Panel"]
-layout_mode = 0
-offset_left = 490.0
-offset_top = 174.0
-offset_right = 560.0
-offset_bottom = 210.0
-theme_override_fonts/font = ExtResource("8_2bc0l")
-theme_override_font_sizes/font_size = 40
-text = "00:"
-
-[node name="Seconds" type="Label" parent="Map/victorycoll/Secretwin/CanvasLayer/Panel"]
+[node name="Seconds" type="Label" parent="Map/victorycoll/winned!2/CanvasLayer/Panel"]
 layout_mode = 0
 offset_left = 554.0
 offset_top = 174.0
@@ -827,7 +828,17 @@ theme_override_fonts/font = ExtResource("8_2bc0l")
 theme_override_font_sizes/font_size = 40
 text = "00."
 
-[node name="Msecs" type="Label" parent="Map/victorycoll/Secretwin/CanvasLayer/Panel"]
+[node name="Minutes" type="Label" parent="Map/victorycoll/winned!2/CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 174.0
+offset_right = 560.0
+offset_bottom = 210.0
+theme_override_fonts/font = ExtResource("8_2bc0l")
+theme_override_font_sizes/font_size = 40
+text = "1"
+
+[node name="Msecs" type="Label" parent="Map/victorycoll/winned!2/CanvasLayer/Panel"]
 layout_mode = 0
 offset_left = 617.0
 offset_top = 175.0
@@ -838,15 +849,16 @@ theme_override_font_sizes/font_size = 40
 text = "00
 "
 
-[node name="nextlevel" type="Button" parent="Map/victorycoll/Secretwin/CanvasLayer"]
+[node name="nextlevel" type="Button" parent="Map/victorycoll/winned!2/CanvasLayer"]
 offset_left = 504.0
 offset_top = 262.0
 offset_right = 631.0
 offset_bottom = 310.0
 text = "Next lebelbs"
 script = ExtResource("9_h3wuo")
+scene = ExtResource("13_mtj8g")
 
-[node name="restart" type="Button" parent="Map/victorycoll/Secretwin/CanvasLayer"]
+[node name="restart" type="Button" parent="Map/victorycoll/winned!2/CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -863,6 +875,11 @@ size_flags_vertical = 4
 text = "Restart"
 script = ExtResource("10_cgtjk")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/victorycoll"]
+transform = Transform3D(-8.69695e-11, 4.46227, -0.0332541, 4.37113e-08, 0.00887828, 16.7137, 1, 1.77366e-15, -7.30577e-07, -161.225, 10.4907, -18.8911)
+material_override = SubResource("StandardMaterial3D_8jo27")
+size = Vector3(1, 0.540894, 0.258911)
+
 [connection signal="area_entered" from="Map/Jumppads/Jumppad2/Area3D" to="Map/Jumppads/Jumppad2" method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Map/killbricks/Jumppad/Area3D" to="Map/killbricks/Jumppad" method="_on_area_3d_area_entered"]
 [connection signal="area_entered" from="Map/killbricks/Jumppad2/Area3D" to="Map/killbricks/Jumppad2" method="_on_area_3d_area_entered"]
@@ -870,7 +887,7 @@ script = ExtResource("10_cgtjk")
 [connection signal="pressed" from="Map/victorycoll/winned!/CanvasLayer/nextlevel" to="Map/victorycoll/winned!" method="_on_nextlevel_pressed"]
 [connection signal="pressed" from="Map/victorycoll/winned!/CanvasLayer/restart" to="Map/victorycoll/winned!/CanvasLayer/Panel" method="_on_button_pressed"]
 [connection signal="pressed" from="Map/victorycoll/winned!/CanvasLayer/restart" to="Map/victorycoll/winned!/CanvasLayer/restart" method="_on_pressed"]
-[connection signal="area_entered" from="Map/victorycoll/Secretwin/Area3D" to="Map/victorycoll/Secretwin" method="_on_area_3d_area_entered"]
-[connection signal="pressed" from="Map/victorycoll/Secretwin/CanvasLayer/nextlevel" to="Map/victorycoll/Secretwin" method="_on_nextlevel_pressed"]
-[connection signal="pressed" from="Map/victorycoll/Secretwin/CanvasLayer/restart" to="Map/victorycoll/Secretwin/CanvasLayer/Panel" method="_on_button_pressed"]
-[connection signal="pressed" from="Map/victorycoll/Secretwin/CanvasLayer/restart" to="Map/victorycoll/Secretwin/CanvasLayer/restart" method="_on_pressed"]
+[connection signal="area_entered" from="Map/victorycoll/winned!2/Area3D" to="Map/victorycoll/winned!2" method="_on_area_3d_area_entered"]
+[connection signal="pressed" from="Map/victorycoll/winned!2/CanvasLayer/nextlevel" to="Map/victorycoll/winned!2" method="_on_nextlevel_pressed"]
+[connection signal="pressed" from="Map/victorycoll/winned!2/CanvasLayer/restart" to="Map/victorycoll/winned!2/CanvasLayer/Panel" method="_on_button_pressed"]
+[connection signal="pressed" from="Map/victorycoll/winned!2/CanvasLayer/restart" to="Map/victorycoll/winned!2/CanvasLayer/restart" method="_on_pressed"]

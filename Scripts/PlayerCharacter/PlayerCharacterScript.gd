@@ -12,10 +12,11 @@ var currentState
 
 #move variables
 @export_group("level time things")
-@export var tb:int
-@export var tg:int
-@export var tp:int
-
+@export var tb:float
+@export var tg:float
+@export var tp:float
+@export_group("music shit")
+@export var music: Resource
 @export_group("move variables")
 var moveSpeed : float
 var desiredMoveSpeed : float 
@@ -135,9 +136,20 @@ var timeBeforeCanGrappleAgainRef : float
 #@onready var fstep = $CameraHolder/FmodEventEmitter3D
 
 func _ready():
-	bronbe.text = str(tp)
-	silver.text = str(tg)
-	gold.text = str(tb)
+	$AudioStreamPlayer.stream = music
+	$AudioStreamPlayer.play()
+	var gmsecd = fmod(tb,1)*100
+	var gsecondsd = tb
+	
+	var smsecd = fmod(tg,1)*100
+	var ssecondsd = tg
+	
+	var bmsecd = fmod(tp,1)*100
+	var bsecondsd = tp 
+	bronbe.text = str("%10.3f" % tp)
+	silver.text = str("%10.3f" % tg)
+	
+	gold.text = str("%10.3f" % tb)
 	#set the start move speed
 	moveSpeed = walkSpeed
 	moveAcceleration = walkAcceleration

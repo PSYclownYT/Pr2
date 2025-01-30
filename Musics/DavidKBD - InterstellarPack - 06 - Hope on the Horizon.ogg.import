@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://pdibvaf7c3fi"
+path="res://.godot/imported/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg-5bfed6713287596ba7c57ab7b1a79e50.oggvorbisstr"
+
+[deps]
+
+source_file="res://Musics/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg"
+dest_files=["res://.godot/imported/DavidKBD - InterstellarPack - 06 - Hope on the Horizon.ogg-5bfed6713287596ba7c57ab7b1a79e50.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

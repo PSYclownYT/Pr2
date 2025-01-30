@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8yjbyrsm3agy"
+path="res://.godot/imported/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg-43d1088706214d661a96d96583af0022.oggvorbisstr"
+
+[deps]
+
+source_file="res://Musics/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg"
+dest_files=["res://.godot/imported/DavidKBD - InterstellarPack - 02 - Plasma Storm.ogg-43d1088706214d661a96d96583af0022.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

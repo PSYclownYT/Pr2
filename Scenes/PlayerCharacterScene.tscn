@@ -1,14 +1,13 @@
-[gd_scene load_steps=32 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=31 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
-[ext_resource type="Environment" uid="uid://ef6rk0oirj7a" path="res://Scenes/PlayerCharacterScene.tres" id="3_wk60f"]
 [ext_resource type="Script" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Arts/Fonts/Ticketing.ttf" id="5_kleop"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
 [ext_resource type="Texture2D" uid="uid://djoe54ae3gp0a" path="res://Arts/Textures/kenney_prototype_textures/orange/texture_06.png" id="7_jclwn"]
-[ext_resource type="Script" path="res://Scenes/wgagsg.gd" id="8_4ei1d"]
+[ext_resource type="Script" path="res://Scenes/timespeedrunthing.gd" id="9_k1no6"]
 [ext_resource type="FontFile" uid="uid://bhtxfokxlbme7" path="res://VCR_OSD_MONO_1.001.ttf" id="9_rkixg"]
 [ext_resource type="Shader" path="res://Arts/Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
@@ -226,7 +225,6 @@ mouseInputSpeed = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraHolder"]
 cull_mask = 1
-environment = ExtResource("3_wk60f")
 current = true
 fov = 100.0
 near = 0.01
@@ -325,6 +323,7 @@ script = ExtResource("4_f4mp1")
 metadata/_edit_use_anchors_ = true
 
 [node name="Reticle" type="CenterContainer" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -559,7 +558,7 @@ offset_left = 1.0
 offset_top = 32.0
 offset_right = 41.0
 offset_bottom = 72.0
-script = ExtResource("8_4ei1d")
+script = ExtResource("9_k1no6")
 
 [node name="Minutes" type="Label" parent="HUD/Panel"]
 layout_mode = 0
@@ -629,5 +628,7 @@ visible = false
 
 [node name="spawn" type="Node" parent="."]
 metadata/value = Vector3(0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="sendKnockback" from="CameraHolder/Camera3D/ObjectTool" to="." method="_on_object_tool_send_knockback"]
